@@ -30,6 +30,22 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	// load support for the JPG and PNG image formats
+	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
+	int initted = IMG_Init(IMG_INIT_PNG);
+	if ((initted&flags) != flags) {
+		SDL_Log("IMG_Init: Failed to init required jpg and png support!\n");
+		SDL_Log("IMG_Init: %s\n", IMG_GetError());
+		// handle error
+	}
+
+	// load sample.png into image
+	SDL_Surface *image;
+	image = IMG_Load("head.png");
+	if (!image) {
+		printf("IMG_Load: %s\n", IMG_GetError());
+		// handle error
+	}
 	bool quit = false;
 	//Struct (Event handler)
 	SDL_Event event;
@@ -120,10 +136,11 @@ int main(int argc, char *argv[])
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 		SDL_RenderFillRect(renderer, &rectangle);
 
-		SDL_RenderPresent(renderer);
+SDL_RenderPresent(renderer);
 		
 	}
-
+	SDL_FreeSurface(image);
+	IMG_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
