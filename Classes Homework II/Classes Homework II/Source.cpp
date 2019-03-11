@@ -25,10 +25,19 @@ public:
 };
 
 
-//class Clock {
-//private:
-//	short int 
-//};
+class Clock {
+private:
+	short int hours;
+	short int minutes;
+	short int seconds;
+public:
+	Clock() :hours(0), minutes(0), seconds(0){}
+	Clock(short int h,short int m, short int s):hours(h),minutes(m),seconds(s){}
+
+	short int h()const { return hours; }
+	short int m()const { return minutes; }
+	short int s()const { return seconds; }
+};
 
 void ex1() {
 	Pixel black;
