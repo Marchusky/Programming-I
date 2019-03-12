@@ -1,12 +1,44 @@
 #include <iostream>
 #include "SDL/include/SDL.h"
 #include "SDL_Image/include/SDL_image.h"
+#include "SDL_Mixer/include/SDL_mixer.h"
 
 #pragma comment(lib, "SDL/SDL2main.lib")
 #pragma comment(lib, "SDL/SDL2.lib")
 #pragma comment(lib, "SDL_Image/SDL2_image.lib")
+#pragma comment(lib, "SDL_Mixer/SDL2_Mixer.lib")
 
 
+enum Key_State
+{
+	KEY_IDLE,
+	KEY_DOWN,
+	KEY_REPEAT,
+	KEY_UP
+};
+
+SDL_Window*window = nullptr;
+SDL_Renderer*render = nullptr;
+SDL_Surface*surface = nullptr;
+SDL_Surface*loadedImage = nullptr;
+
+//Textures
+SDL_Texture* bg_texture = nullptr;
+SDL_Texture* object_texture = nullptr;
+SDL_Texture* prjectile_texture = nullptr;
+
+//Input
+Key_State keys[300]; //ask wtf is this.
+
+//Rectangles
+SDL_Rect bg_rect = { 0, 0, 1920, 1080 };
+SDL_Rect ship_rect = { 10, 10, 160, 160 };
+SDL_Rect bullet_rect = { -50, -50, 36, 16 };
+bool shot = false;
+
+bool InitSDL{
+
+}
 int main(int argc, char *argv[])
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -30,6 +62,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+
 	// load support for the JPG and PNG image formats
 	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
 	int initted = IMG_Init(IMG_INIT_PNG);
@@ -41,11 +74,16 @@ int main(int argc, char *argv[])
 
 	// load sample.png into image
 	SDL_Surface *image;
-	image = IMG_Load("head.png");
+	image = IMG_Load("Game/head.png");
 	if (!image) {
 		printf("IMG_Load: %s\n", IMG_GetError());
 		// handle error
-	}
+	}
+	
+	//void Draw() {
+	//	SDL_RenderCopy(renderer,/*head texture*/, nullptr, /*&head texture_rect*/)
+	//}
+
 	bool quit = false;
 	//Struct (Event handler)
 	SDL_Event event;
@@ -116,13 +154,26 @@ int main(int argc, char *argv[])
 		if (!laserCharged) {
 			laser.x++;
 		}
-
+		if (rectangle.x >= 430) {
+			rectangle.x = 430;
+		}
+		if (rectangle.x <= 0) {
+			rectangle.x = 0;
+		}
+		if (rectangle.y >= 480) {
+			rectangle.y = 480;
+		}
+		if (rectangle.y >= 430) {
+			rectangle.y = 430;
+		}
 		if (laser.x > 500)
 		{
 			laser.x = rectangle.x + 13;
 			laser.y = rectangle.y + 20;
 			laserCharged = true;
 		}
+
+		
 
 		//render background
 		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
