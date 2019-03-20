@@ -18,6 +18,10 @@ bool ModuleWindow::Init()
 	{
 		return false;
 	}
+	// TODO 3: pick the width and height and experiment with flags: borderless / fullscreen / resizable,
+	// then create the window and check for errors
+	SDL_Window* window = SDL_CreateWindow("TODO", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+
 }
 
 bool ModuleWindow::CleanUp()
@@ -25,8 +29,7 @@ bool ModuleWindow::CleanUp()
 
 	return false;
 }
-// TODO 3: pick the width and height and experiment with flags: borderless / fullscreen / resizable,
-// then create the window and check for errors
+
 
 // TODO 4: Finally create a screen surface and keep it as a public variable
 
