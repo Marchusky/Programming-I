@@ -1,9 +1,20 @@
+#include "ModuleRender.h"
+#include "ModuleWindow.h"
+#include "ModuleTextures.h"
+#include "ModuleAudio.h"
+#include "SDL/include/SDL.h"
+#include "SDL_image/include/SDL_image.h"
+
+
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
+
+//Error detectado con el puntero externo a App
+//Comentar al equipo y preguntar si no es resuelto
 
 ModuleRender::ModuleRender() : Module() //rectangulo camera definido
 {
@@ -29,7 +40,7 @@ bool ModuleRender::Init()
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags); //crea renderer
-	
+
 	if (renderer == NULL) //comprueba error al crear renderer
 	{
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
