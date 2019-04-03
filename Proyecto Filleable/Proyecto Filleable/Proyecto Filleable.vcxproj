@@ -115,10 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FadeToBlack.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FadeToBlack.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="p2Point.h" />
   </ItemGroup>
