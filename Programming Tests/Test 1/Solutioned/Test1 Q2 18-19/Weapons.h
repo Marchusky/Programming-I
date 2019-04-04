@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------- */
-/*                         Marc Gallardo Quesada                           */
+/*                         INSERT YOUR NAME HERE                           */
 /* ----------------------------------------------------------------------- */
 
 #ifndef WEAPONS_H
@@ -64,15 +64,18 @@ float distance(float ax, float ay, float bx, float by)
  */
 void damageEnemiesWithGrenade(Grenade *grenade, Enemy *enemies, int numEnemies)
 {
-	// TODO
+	const float grenadeX = grenade->x;
+	const float grenadeY = grenade->y;
+	const float grenadeRadius = grenade->radius;
+
 	for (int i = 0; i < numEnemies; ++i) {
-		if (distance(grenade->x, grenade->y, (enemies + i)->x, (enemies + i)->y) <= grenade->radius) {
-			
-			if ((enemies+i)->life < grenade->damage) {
-				(enemies + i)->life = 0;
-			}
-			else {
-				(enemies + i)->life = (enemies + i)->life - grenade->damage;
+		Enemy *enemyPtr = enemies + i;
+		const float enemyX = enemyPtr->x;
+		const float enemyY = enemyPtr->y;
+		if (distance(grenadeX, grenadeY, enemyX, enemyY) <= grenadeRadius) {
+			enemyPtr->life -= grenade->damage;
+			if (enemyPtr->life < 0) {
+				enemyPtr->life = 0;
 			}
 		}
 	}
@@ -88,20 +91,15 @@ void damageEnemiesWithGrenade(Grenade *grenade, Enemy *enemies, int numEnemies)
 Enemy *findTargetEnemy(SeekerMissile *missile, Enemy *enemies, int numEnemies)
 {
 	Enemy *foundEnemy = nullptr;
-	
-	// TODO
+	const char *targetName = missile->targetName;
+
 	for (int i = 0; i < numEnemies; ++i) {
-		
-		//strcmp(missile->targetName, ((enemies+i) + i)->name);
-
-		/*if (strcmp(missile->targetName, (enemies + i)->name)=0) {
-			foundEnemy->life = foundEnemy->life + (enemies + i)->life;
-			foundEnemy->name = (enemies + i)->name;
-			foundEnemy->x = foundEnemy->x + (enemies + i)->x;
-			foundEnemy->y = foundEnemy->y + (enemies + i)->y;
-		}*/
+		Enemy *enemyPtr = enemies + i;
+		const char *enemyName = enemyPtr->name;
+		if (strcmp(targetName, enemyName) == 0) {
+			foundEnemy = enemyPtr;
+		}
 	}
-
 	return foundEnemy;
 }
 
@@ -112,12 +110,9 @@ Enemy *findTargetEnemy(SeekerMissile *missile, Enemy *enemies, int numEnemies)
  */
 void damageTargetEnemy(SeekerMissile *missile, Enemy *targetEnemy)
 {
-	// TODO
-	if (targetEnemy->life < missile->damage) {
+	targetEnemy->life -= missile->damage;
+	if (targetEnemy->life < 0) {
 		targetEnemy->life = 0;
-	}
-	else {
-		targetEnemy->life = targetEnemy->life - missile->damage;
 	}
 }
 
