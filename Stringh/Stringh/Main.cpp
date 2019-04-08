@@ -11,5 +11,5 @@ int main()
 	// Compare ( operator== )
 	bool equals = (str1 == str2);
 	// Copy and concat ( operator+ )
-	String str3 = str1 + str2;
+	String str3 = str1 += str2;
 }
