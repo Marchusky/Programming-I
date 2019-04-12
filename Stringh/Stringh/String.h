@@ -47,7 +47,7 @@ public:
 	}// to concat
 	bool operator==(const char *str) const
 	{
-		if (strcmp(array, str))
+		if (strcmp(array, str)==1)
 		{
 			return true;
 		}

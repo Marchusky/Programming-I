@@ -1,4 +1,5 @@
 #include "String.h" // We will implement this
+#include "Array.h"  // We will implement this
 
 int main()
 {
