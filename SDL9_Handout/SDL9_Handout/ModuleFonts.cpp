@@ -53,7 +53,7 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	App->textures->GetSize(tex, width_tex, height_tex);
 
 	fonts[id].len = strlen(characters);// len: lenght of the table
-	strcpy(fonts[id].table, characters);// table: array of chars to have the list of characters
+	strcpy_s(fonts[id].table, characters);// table: array of chars to have the list of characters
 	fonts[id].row_chars = strlen(characters) / rows;// row_chars: amount of chars per row of the texture
 	fonts[id].char_w = width_tex / fonts[id].row_chars;// char_w: width of each character
 	fonts[id].char_h = height_tex / rows;// char_h: height of each character
