@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Modules\General">
+      <UniqueIdentifier>{01bbab35-d952-416a-80d8-9e7348795f18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Players">
+      <UniqueIdentifier>{3d25b143-0e8e-40fd-9081-1a35a4bbcc3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Screens">
+      <UniqueIdentifier>{0e1173b3-6137-4117-9ab2-47cc19199f49}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCharacterSelect.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCongratsScreen.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneHaohmaru.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHaohmaru.cpp">
+      <Filter>Modules\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWelcomeScreen.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHaohmaru2.cpp">
+      <Filter>Modules\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleNeoGeoScreen.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCongratsScreen2.cpp">
+      <Filter>Modules\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollision.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>Modules\General</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Globals.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryLeaks.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCharacterSelect.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCongratsScreen.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneHaohmaru.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleHaohmaru.h">
+      <Filter>Modules\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWelcomeScreen.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleHaohmaru2.h">
+      <Filter>Modules\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleNeoGeoScreen.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCongratsScreen2.h">
+      <Filter>Modules\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCollision.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>Modules\General</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Qeue.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
