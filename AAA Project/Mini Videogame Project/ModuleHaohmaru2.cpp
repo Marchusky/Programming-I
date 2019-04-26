@@ -33,7 +33,7 @@ bool ModuleHaohmaru2::Start()
 	graphics = App->textures->Load("Textures/Spritesheets/haohmaru_spritesheet2.png"); // arcade version
 	current_animation = &idle;
 	//player collider
-	player2Collider = App->collision->AddCollider({ position.x + 10, position.y - 100, 50, 100 }, COLLIDER_PLAYER2, this);
+	player2Collider = App->collision->AddCollider({ position.x + 25, position.y - 90, 40, 80 }, COLLIDER_PLAYER2, this);
 
 	return ret;
 }
@@ -51,7 +51,7 @@ update_status ModuleHaohmaru2::Update()
 	}
 
 	//Update collider position to player position
-	player2Collider->SetPos(position.x +20, position.y - 100);
+	player2Collider->SetPos(position.x + 25, position.y - 90);
 
 	return UPDATE_CONTINUE;
 }  

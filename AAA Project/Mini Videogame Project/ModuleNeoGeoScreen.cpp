@@ -155,5 +155,13 @@ update_status ModuleNeo::Update() {
 		Mix_FadeOutMusic(2000);
 	}
 
+	//shortcut
+
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN) {
+
+		App->fade->FadeToBlack(this, App->background, 1.0f);
+		Mix_FadeOutMusic(2000);
+	}
+
 	return UPDATE_CONTINUE;
 }

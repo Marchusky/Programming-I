@@ -135,7 +135,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	if (COLLIDER_PLAYER1_SHOT == c1->type && COLLIDER_PLAYER2 == c2->type)
 	{
-		AddParticle(tornado_colliding, c1->rect.x, c1->rect.y - 5, COLLIDER_NONE); 
+		//AddParticle(tornado_colliding, c1->rect.x, c1->rect.y - 5, COLLIDER_NONE); 
 	}
 
 		       
@@ -147,6 +147,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
+			active[i]->collider->to_delete = true;
 			delete active[i];
 			active[i] = nullptr;
 
@@ -184,8 +185,8 @@ bool Particle::Update()
 	position.x += speed.x;
 	position.y += speed.y;
 
-	//if (collider != nullptr)
-		//collider->SetPos(position.x, position.y);
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 
 	return ret;
 }

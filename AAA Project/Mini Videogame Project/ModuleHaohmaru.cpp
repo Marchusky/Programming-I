@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -6,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleHaohmaru.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 #include "ModuleCollision.h"
 #include "ModuleHaohmaru2.h"
 
@@ -81,6 +83,27 @@ ModuleHaohmaru::ModuleHaohmaru()
 	kick.PushBack({ 43, 21, 68, 99 });
 	kick.speed = 0.15f;
 
+	//crouch animation
+	crouchd.PushBack({ 76, 0, 94, 112 });
+	crouchd.speed = 0.1f;
+	crouchd.loop = false;
+
+	//crouch kick animation
+	crouchK.PushBack({ 30, 846, 85, 90 });
+	crouchK.PushBack({ 140, 846, 108, 90 });
+	crouchK.PushBack({ 30, 846, 85, 90 });
+	crouchK.speed = 0.15f;
+
+	//crouch attack animation
+	crouchA.PushBack({ 1080, 370, 84, 115 });
+	crouchA.PushBack({ 1240, 370, 124, 115 });
+	crouchA.PushBack({ 1364, 377, 126, 115 });
+	crouchA.PushBack({ 1494, 425, 123, 75 });
+	crouchA.PushBack({ 1629, 425, 121, 67 });
+	crouchA.PushBack({ 1758, 429, 83, 69 });
+	crouchA.PushBack({ 1842, 429, 81, 69 });
+	crouchA.PushBack({ 1936, 427, 73, 75 });
+	crouchA.speed = 0.3f;
 }
 
 ModuleHaohmaru::~ModuleHaohmaru()
@@ -98,6 +121,9 @@ bool ModuleHaohmaru::Start()
 	graphicsa = App->textures->Load("Textures/Spritesheets/haohmaru_light_attack.png");
 	graphicst = App->textures->Load("Textures/Spritesheets/haohmaru_anim_tornado.png");
 	graphicsk = App->textures->Load("Textures/Spritesheets/HaohmaruKick.png");
+	graphicsc = App->textures->Load("Textures/Spritesheets/haohmaru_crouch.png");
+
+	font_score = App->fonts->Load("Textures/Fonts_Points_Spritesheets.png", "0123456789", 1);
 
 	bef_tornado = App->audio->LoadFX("Audios/FX/Haohmaru/HaohmaruTornadoVoice.wav");
 	while_tornado = App->audio->LoadFX("Audios/FX/Haohmaru/HaohmaruTornado.wav");
@@ -105,7 +131,7 @@ bool ModuleHaohmaru::Start()
 	slash = App->audio->LoadFX("Audios/FX/General/Slash.wav");
 
 	//player collider
-	player1Collider = App->collision->AddCollider({position.x +10, position.y -100, 50, 100 }, COLLIDER_PLAYER1, this);
+	player1Collider = App->collision->AddCollider({position.x +15, position.y -90, 40, 80 }, COLLIDER_PLAYER1, this);
 	player1Collider->callback = App->player;
 
 	return ret;
@@ -122,7 +148,6 @@ update_status ModuleHaohmaru::Update()
 	int speed = 1;
 
 	//GodMode Here
-
 
 	while (input_ex(inputs)) {
 
@@ -193,19 +218,39 @@ update_status ModuleHaohmaru::Update()
 				break;
 			case ST_ATTACK_STANDING:
 				current_animation = &attack;
+				
 				Mix_PlayChannel(-1, slash, 0);
 				//Here will be the colliders & collisions
 
+				if (collider)
+				{
+					attackCollider = App->collision->AddCollider({ position.x + 50, position.y - 70, 80, 27}, COLLIDER_PLAYER1_SHOT, this);
+					collider = false;
+				}
+
 				break;
 			case ST_KICK_STANDING:
+
+				if (collider)
+				{
+					attackCollider = App->collision->AddCollider({ position.x + 10, position.y - 50, 80, 30 }, COLLIDER_PLAYER1_SHOT, this);
+					collider = false;
+				}
+
 				current_animation = &kick;
 				Mix_PlayChannel(-1, kickS, 0);
 
 				break;
 			case ST_TORNADO:
+
 				current_animation = &tornado;
 
-				App->particles->AddParticle(App->particles->tornado_creation, position.x - 20, position.y - 93, COLLIDER_PLAYER1_SHOT);
+				if(!tornado_Once)
+				{
+					App->particles->AddParticle(App->particles->tornado_creation, position.x - 20, position.y - 93, COLLIDER_PLAYER1_SHOT);
+
+					tornado_Once = true;
+				}
 				
 				// Also here will be the audio mixer
 				Mix_PlayChannel(-1, bef_tornado, 0);
@@ -213,7 +258,7 @@ update_status ModuleHaohmaru::Update()
 
 				break;
 			case ST_CROUCH:
-				current_animation = &crouch;
+				current_animation = &crouchd;
 
 				break;
 			case ST_CROUCH_ATTACK:
@@ -261,7 +306,19 @@ update_status ModuleHaohmaru::Update()
 			{
 				App->render->Blit(graphicsj, position.x, position.y - hm.h - 5, &hm);
 			}
-
+			if (current_animation == &crouchd)
+			{
+				App->render->Blit(graphicsc, position.x, position.y - hm.h - 5, &hm);
+			}
+			if (current_animation == &crouchK)
+			{
+				App->render->Blit(graphics, position.x + 15, position.y - hm.h - 5, &hm);
+			}
+			if (current_animation == &crouchA)
+			{
+				App->render->Blit(graphics, position.x + 15, position.y - hm.h + 5, &hm);
+			}
+		
 			// Calculate collisions ---------------------------------------------------
 			//He calculado las colisiones prácicamente igual que calculan las colisiones entre particulas.
 			//Tengo un getCollider hecho en ModuleColliders.h que me coje la array de colliders para poderla usar aquí.
@@ -300,7 +357,11 @@ update_status ModuleHaohmaru::Update()
 			}
 
 			//Update collider position to player position
-			player1Collider->SetPos(position.x + 10, position.y - 100);
+			player1Collider->SetPos(position.x + 15, position.y - 90);
+
+			sprintf_s(score_text, 10, "%7d", score);
+			App->fonts->BlitText(200, 200, font_score, "10");
+
 			return UPDATE_CONTINUE;
 		}
 	}
@@ -352,6 +413,7 @@ bool ModuleHaohmaru::input_ex(p2Qeue<Player_Inputs>& inputs) {
 
 			case SDLK_a:
 				inputs.Push(IN_A);
+				score += 13;
 				break;
 
 			case SDLK_d:
@@ -434,6 +496,13 @@ void ModuleHaohmaru::input_in(p2Qeue<Player_Inputs>& inputs) {
 		{
 			inputs.Push(IN_ATTACK_FINISH);
 			attack_timer = 0;
+
+			if (attackCollider != nullptr)
+			{
+				collider = true;
+				attackCollider->to_delete = true;
+				attackCollider = nullptr;
+			}
 		}
 	}
 
@@ -452,6 +521,13 @@ void ModuleHaohmaru::input_in(p2Qeue<Player_Inputs>& inputs) {
 		{
 			inputs.Push(IN_KICK_FINISH);
 			kick_timer = 0;
+
+			if (attackCollider != nullptr)
+			{
+				collider = true;
+				attackCollider->to_delete = true;
+				attackCollider = nullptr;
+			}
 		}
 	}
 
@@ -461,6 +537,7 @@ void ModuleHaohmaru::input_in(p2Qeue<Player_Inputs>& inputs) {
 		{
 			inputs.Push(IN_TORNADO_FINISH);
 			tornado_timer = 0;
+			tornado_Once = false;
 		}
 	}
 }
@@ -481,6 +558,7 @@ bool ModuleHaohmaru::CleanUp()
 	App->textures->Unload(graphicsj);
 	App->textures->Unload(graphicst);
 	App->textures->Unload(graphicsk);
+	App->textures->Unload(graphicsc);
 
 	App->audio->DeleteChunk(bef_tornado);
 	App->audio->DeleteChunk(while_tornado);

@@ -312,11 +312,13 @@ public:
 	SDL_Texture* graphicsa = nullptr;
 	SDL_Texture* graphicst = nullptr;
 	SDL_Texture* graphicsk = nullptr;
+	SDL_Texture* graphicsc = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;
 	Animation jump;
+	Animation fall;
 	Animation jumpK;
 	Animation jumpA;
 	Animation jumpF;
@@ -325,7 +327,7 @@ public:
 	Animation jumpB;
 	Animation jumpBA;
 	Animation jumpBK;
-	Animation crouch;
+	Animation crouchd;
 	Animation crouchA;
 	Animation crouchK;
 	Animation tornado;
@@ -342,11 +344,17 @@ public:
 	Mix_Chunk* while_tornado = nullptr;
 
 	Collider* player1Collider;
+	Collider* attackCollider;
 
-	int JumpCount = 0;
-	bool JumpMin = false;
-	bool JumpMax = false;
+	SDL_Texture* fonts = nullptr;
+	int font_score = -1;
+	char score_text[10];
+	uint score = 0;
 
+	int time = 0;
+
+	bool collider = true;
+	bool tornado_Once = false;
 	bool GodMode = false;
 };
 

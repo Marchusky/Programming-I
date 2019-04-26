@@ -1,9 +1,9 @@
 #ifndef __ModuleBackground_H__
 #define __ModuleBackground_H__
-
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "p2Point.h"
 
 #include "SDL/include/SDL.h"
 #include "SDL_Mixer/include/SDL_mixer.h"
@@ -24,10 +24,14 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-
-	char text1[9];
-
-	int font = 0;
+	SDL_Texture* lifebar = nullptr;
+	SDL_Texture* UI = nullptr;
+	SDL_Rect Rbar;
+	SDL_Rect Lbar;
+	SDL_Rect IRbar;
+	SDL_Rect ILbar;
+	SDL_Rect HaoBar;
+	SDL_Rect Points;
 
 	Animation background;
 
@@ -38,4 +42,4 @@ public:
 	int timeAudio1;
 };
 
-#endif
+#endif // __MODULE_CHARACTER_SELECT_H__
