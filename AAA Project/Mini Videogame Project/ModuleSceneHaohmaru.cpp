@@ -100,6 +100,9 @@ bool ModuleBackground::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 
+	/*RLimit = App->collision->AddCollider({ 519,180,50,SCREEN_HEIGHT }, COLLIDER_WALL);
+	LLimit = App->collision->AddCollider({ 111,180,50,SCREEN_HEIGHT }, COLLIDER_WALL);*/
+
 	return ret;
 }
 
@@ -149,20 +152,20 @@ update_status ModuleBackground::Update()
 			App->fade->FadeToBlack(this, App->congrats, 1.5f);
 			Mix_FadeOutMusic(1500);
 			IRbar.w = 129;
-			ILbar.x = 2;
+			ILbar.x = 129;
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN){ //Health-substracting button
 	
-		ILbar.x -= 10;
+		ILbar.w -= 10;
 		
 		if (ILbar.w <= 1) //40 instead of 0 because it doesnt exactly fit. If the duel ends then reset the healthbars
 		{
 			App->fade->FadeToBlack(this, App->congrats, 1.5f);
 			Mix_FadeOutMusic(1500);
 			IRbar.w = 129;
-			ILbar.x = 2;
+			ILbar.w = 129;
 		}
 	}
 	//background

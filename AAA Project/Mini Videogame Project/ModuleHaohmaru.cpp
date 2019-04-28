@@ -166,12 +166,19 @@ update_status ModuleHaohmaru::Update()
 			case ST_FORWARD:
 				current_animation = &forward;
 				position.x += speed + 1.3;
-
+				if (position.x >= 430)
+				{
+					position.x = 430;
+				}
 
 				break;
 			case ST_BACKWARD:
 				current_animation = &backward;
 				position.x -= speed + 1;
+				if (position.x <= 140)
+				{
+					position.x = 140;
+				}
 
 				break;
 			case ST_JUMP_NEUTRAL:

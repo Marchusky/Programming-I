@@ -33,6 +33,9 @@ public:
 	SDL_Rect HaoBar;
 	SDL_Rect Points;
 
+	//Collider* LLimit;
+	//Collider* RLimit;
+
 	Animation background;
 
 	Mix_Music* HaohmaruStage = nullptr;
