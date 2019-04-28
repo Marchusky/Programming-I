@@ -50,16 +50,11 @@ ModuleBackground::ModuleBackground()
 	Lbar.y = 113;
 	Lbar.w = 134;
 	Lbar.h = 15;
-	
+
 	IRbar.x = ILbar.x = 0;
 	IRbar.y = ILbar.y = 2;
 	IRbar.w = ILbar.w = 128;
 	IRbar.h = ILbar.h = 9;
-
-	/*ILbar.x = 3;
-	ILbar.y = 4;
-	ILbar.w = 129;
-	ILbar.h = 9;*/
 
 	//Fighter_Name//
 	HaoBar.x = 276;
@@ -72,6 +67,12 @@ ModuleBackground::ModuleBackground()
 	Points.y = 15;
 	Points.w = 18;
 	Points.h = 8;
+
+	//KO//
+	KO.x = 485;
+	KO.y = 393;
+	KO.w = 28;
+	KO.h = 23;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -100,9 +101,6 @@ bool ModuleBackground::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 
-	/*RLimit = App->collision->AddCollider({ 519,180,50,SCREEN_HEIGHT }, COLLIDER_WALL);
-	LLimit = App->collision->AddCollider({ 111,180,50,SCREEN_HEIGHT }, COLLIDER_WALL);*/
-
 	return ret;
 }
 
@@ -122,7 +120,6 @@ bool ModuleBackground::CleanUp() {
 	App->player->Disable();
 	App->player2->Disable();
 	App->collision->Disable();
-
 	return ret;
 }
 
@@ -132,19 +129,20 @@ update_status ModuleBackground::Update()
 	
 	// Draw everything 
 
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_Z] == KEY_STATE::KEY_DOWN) {
 
 		App->fade->FadeToBlack(this, App->congrats, 1.5f);
 		Mix_FadeOutMusic(1500);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN) {
 
 		App->fade->FadeToBlack(this, App->congrats2, 1.5f);
 		Mix_FadeOutMusic(1500);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN){ //Health-substracting button
-		
+
+	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) { //Health-substracting button
+
 		IRbar.w -= 10;
 
 		if (IRbar.w <= 1) //40 instead of 0 because it doesnt exactly fit. If the duel ends then reset the healthbars
@@ -155,11 +153,10 @@ update_status ModuleBackground::Update()
 			ILbar.x = 129;
 		}
 	}
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) { //Health-substracting button
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN){ //Health-substracting button
-	
 		ILbar.w -= 10;
-		
+
 		if (ILbar.w <= 1) //40 instead of 0 because it doesnt exactly fit. If the duel ends then reset the healthbars
 		{
 			App->fade->FadeToBlack(this, App->congrats, 1.5f);
@@ -171,17 +168,18 @@ update_status ModuleBackground::Update()
 	//background
 	App->render->Blit(graphics, 0, 0, &(background.GetCurrentFrame()), 0.75f);
 
-	//lifebars//
+	//lifebar
 	App->render->Blit(lifebar, 380, 212, &Rbar);
 	App->render->Blit(lifebar, 382, 214, &IRbar);
 	App->render->Blit(lifebar, 165, 212, &Lbar);
 	App->render->Blit(lifebar, 169, 214, &ILbar);
 
-	//UI//
+	//UI
 	App->render->Blit(UI, 170, 230, &HaoBar);
 	App->render->Blit(UI, 447, 230, &HaoBar);
 	App->render->Blit(UI, 400, 202, &Points);
 	App->render->Blit(UI, 185, 202, &Points);
+	App->render->Blit(UI, 325, 202, &KO);
 
 	return UPDATE_CONTINUE;
 }

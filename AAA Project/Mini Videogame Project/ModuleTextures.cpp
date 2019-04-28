@@ -69,8 +69,12 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 		}
 		else
 		{
-			//Puts the texture in the last one and advances one position in the array.
-			textures[last_texture++] = texture;
+			for (uint i = 0; i < MAX_TEXTURES; ++i) {
+				if (textures[i] == nullptr) {
+					textures[i] = texture;
+					break;
+				}
+			}
 		}
 
 		SDL_FreeSurface(surface);
@@ -79,24 +83,25 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	return texture;
 }
 
-// Load new texture from file path
-bool ModuleTextures::Unload(SDL_Texture* texture)
+bool ModuleTextures::Unload(SDL_Texture * texture)
 {
 	bool ret = false;
 
-	for (uint i = 0; i < MAX_TEXTURES; ++i)
+	if (texture != nullptr)
 	{
-		if (texture == textures[i])
+		for (int i = 0; i < MAX_TEXTURES; ++i)
 		{
-			SDL_DestroyTexture(textures[i]);
-			textures[i] = nullptr;
-			ret = true;
-			break;
+			if (textures[i] == texture)
+			{
+				textures[i] = nullptr;
+				ret = true;
+				break;
+			}
 		}
+		SDL_DestroyTexture(texture);
 	}
 
 	return ret;
-
 }
 
 void ModuleTextures::GetSize(const SDL_Texture* texture, uint& width, uint& height) const

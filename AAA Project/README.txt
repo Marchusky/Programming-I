@@ -29,13 +29,13 @@ SPACE key: next scene
 ESC key: Exit game
 
 Player 1 instructions:
--Arrows: player movement (left to tright, jump, crouch)(character selection)
+-Arrows: player movement (left to right, jump, crouch)(character selection)
 -A key: sword, punch light attack
 -D key: kick light attack
 
 Player 2 instructions: 
-- U, H, J, K: up, left, tight, crouch, left respectivily (character selection)
-- 1 key(number): sword, punch light attack
+- U, H, J, K: up, left, right, crouch, left respectively (character selection)
+- 2 key(number): sword, punch light attack
 - 3 key(number):kick light attack
 
 List of Versions:

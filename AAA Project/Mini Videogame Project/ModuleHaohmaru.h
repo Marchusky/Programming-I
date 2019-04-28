@@ -11,7 +11,7 @@
 #include "SDL_Mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_Mixer/SDL2_mixer.lib" )
 
-#define JUMP_TIME 650
+#define JUMP_TIME 1200
 #define ATTACK_TIME 450
 #define KICK_TIME 350
 #define TORNADO_TIME 1000
@@ -313,6 +313,11 @@ public:
 	SDL_Texture* graphicst = nullptr;
 	SDL_Texture* graphicsk = nullptr;
 	SDL_Texture* graphicsc = nullptr;
+	SDL_Texture* graphicsca = nullptr;
+	SDL_Texture* graphicsjk = nullptr;
+	SDL_Texture* graphicsja = nullptr;
+	SDL_Texture* graphicsjf = nullptr;
+	SDL_Texture* graphicsjb = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation forward;
@@ -322,16 +327,17 @@ public:
 	Animation jumpK;
 	Animation jumpA;
 	Animation jumpF;
+	Animation fallF;
 	Animation jumpFA;
 	Animation jumpFK;
 	Animation jumpB;
+	Animation fallB;
 	Animation jumpBA;
 	Animation jumpBK;
 	Animation crouchd;
 	Animation crouchA;
 	Animation crouchK;
 	Animation tornado;
-	SDL_Rect jump1;
 	Animation attack;
 	Animation kick;
 	iPoint position;
@@ -343,19 +349,26 @@ public:
 	Mix_Chunk* bef_tornado = nullptr;
 	Mix_Chunk* while_tornado = nullptr;
 
-	Collider* player1Collider;
+	//Main collider
+	Collider* P1MainCollider; 
+
+	Collider* p1IdleCollider;
+	Collider* p1CrouchCollider;
 	Collider* attackCollider;
 
-	SDL_Texture* fonts = nullptr;
 	int font_score = -1;
 	char score_text[10];
 	uint score = 0;
 
-	int time = 0;
+	int jumped = 0;
 
+	bool MCol_ToActivate = false;
 	bool collider = true;
 	bool tornado_Once = false;
 	bool GodMode = false;
+	bool maxpos = false;
+	bool minpos = false;
+	bool death = false;
 };
 
 #endif

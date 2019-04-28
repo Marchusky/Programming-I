@@ -7,6 +7,9 @@
 #include "ModuleCollision.h"
 #include "ModuleHaohmaru.h"
 #include "ModuleHaohmaru2.h"
+#include "ModuleSceneHaohmaru.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleCongratsScreen.h"
 
 
 #include "SDL/include/SDL_timer.h"
@@ -133,12 +136,20 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
-	if (COLLIDER_PLAYER1_SHOT == c1->type && COLLIDER_PLAYER2 == c2->type)
+	if (c1->type == COLLIDER_PLAYER1_SHOT && c2->type == COLLIDER_PLAYER2 ||
+		c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER1_SHOT)
 	{
-		//AddParticle(tornado_colliding, c1->rect.x, c1->rect.y - 5, COLLIDER_NONE); 
-	}
+		App->background->IRbar.w -= 10;
 
-		       
+		if (App->background->IRbar.w <= 1)
+		{
+			App->fade->FadeToBlack(this, App->congrats, 1.5f);
+			Mix_FadeOutMusic(1500);
+			App->background->IRbar.w = 129;
+			App->background->ILbar.x = 129;
+		}
+	}
+	 	     
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -146,13 +157,21 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
-		{
+		{			
+				App->background->IRbar.w -= 18;
+				App->player->score -= 150;
+
+				if (App->background->IRbar.w < 1)
+				{
+					App->player->death = true;
+				}
+		}
 			active[i]->collider->to_delete = true;
 			delete active[i];
 			active[i] = nullptr;
 
 			break;
-		}
+		
 	}
 }
 

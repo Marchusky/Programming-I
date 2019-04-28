@@ -149,7 +149,7 @@ update_status ModuleNeo::Update() {
 
 	App->render->Blit(intro, 120, 146, &(IntroNeo.GetCurrentFrame()), 0.75f);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN || (SDL_GetTicks() - time) > 7000) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || (SDL_GetTicks() - time) > 7000) {
 
 		App->fade->FadeToBlack(this, App->welcome, 2.0f);
 		Mix_FadeOutMusic(2000);

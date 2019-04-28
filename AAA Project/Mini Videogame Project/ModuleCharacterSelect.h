@@ -45,8 +45,6 @@ public:
 	SDL_Rect HaoLet2;
 	SDL_Rect HaoBorn2;
 
-	int time;
-
 	Mix_Music* McharSelect = nullptr;
 	Mix_Chunk* IntroHM = nullptr;
 	Mix_Chunk* CharSel = nullptr;

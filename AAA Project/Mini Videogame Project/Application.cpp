@@ -22,19 +22,19 @@ Application::Application() {
 	modules[0] = window = new ModuleWindow();
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
+	modules[3] = audio = new ModuleAudio();
+	modules[4] = textures = new ModuleTextures();
 	modules[5] = neogeo = new ModuleNeo();
-	modules[6] = welcome = new ModuleWelcomeScreen();
-	modules[7] = characterSelect = new ModuleCharacterSelection();
+	modules[6] = characterSelect = new ModuleCharacterSelection();
+	modules[7] = welcome = new ModuleWelcomeScreen();
 	modules[8] = background = new ModuleBackground();
-	modules[9] = player = new ModuleHaohmaru();
-	modules[10] = congrats = new ModuleCongratsScreen();
-	modules[11] = congrats2 = new ModuleCongratsScreen2();
+	modules[9] = congrats = new ModuleCongratsScreen();
+	modules[10] = congrats2 = new ModuleCongratsScreen2();
+	modules[11] = player = new ModuleHaohmaru();
 	modules[12] = player2 = new ModuleHaohmaru2();
-	modules[13] =  particles = new ModuleParticles();
-	modules[14] = collision = new ModuleCollision();
-	modules[15] = fonts = new ModuleFonts();
+	modules[13] = particles = new ModuleParticles();
+	modules[14] = fonts = new ModuleFonts();
+	modules[15] = collision = new ModuleCollision();
 	modules[16] = fade = new ModuleFadeToBlack();
 	
 }
@@ -58,7 +58,6 @@ bool Application::Init() {
 	congrats2->Disable();
 	player->Disable();
 	player2->Disable();
-	particles->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; i++) {
 

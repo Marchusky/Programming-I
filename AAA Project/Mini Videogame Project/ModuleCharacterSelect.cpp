@@ -55,6 +55,11 @@ bool ModuleCharacterSelection::Start() {
 
 	LOG("Loading character selection scene");
 
+	square1X = 211;
+	square1Y = 210;
+	square2X = 428;
+	square2Y = 210;
+
 	charSelect = App->textures->Load("Textures/Screens/CharacterSelecting.png");
 	Characters = App->textures->Load("Textures/UI/Character Selection.png");
 	player1 = App->textures->Load("Textures/UI/Sprite_Sheet_UI_1.png");
@@ -67,8 +72,6 @@ bool ModuleCharacterSelection::Start() {
 
 	Mix_FadeInMusic(McharSelect, -1, 00);
 
-	time = SDL_GetTicks();
-
 	return true;
 }
 
@@ -77,8 +80,6 @@ bool ModuleCharacterSelection::CleanUp() {
 	LOG("Unloading selection scene");
 
 	this->Disable();
-
-	time = 0;
 
 	App->textures->Unload(charSelect);
 	App->textures->Unload(Characters);
@@ -218,16 +219,6 @@ update_status ModuleCharacterSelection::Update() {
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-
-		Mix_PlayChannel(-1, IntroHM, 0);
-
-		Mix_VolumeChunk(IntroHM, MIX_MAX_VOLUME / 2);
-
-		App->fade->FadeToBlack(this, App->background, 1.5f);
-
-		Mix_FadeOutMusic(1500);
-	}
 
 	App->render->Blit(charSelect, 160, 195, NULL);
 	App->render->Blit(Characters, 210, 210, NULL);

@@ -48,6 +48,7 @@ public:
 	void Reset()
 	{
 		current_frame = 0;
+		loops = 0;
 	}
 
 	// This function sets an ended animation to end

@@ -9,8 +9,10 @@
 #include "ModuleCongratsScreen.h"
 #include "ModuleInput.h"
 #include "ModuleHaohmaru.h"
+#include "ModuleHaohmaru2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 
 ModuleCongratsScreen::ModuleCongratsScreen() {
 
@@ -30,6 +32,7 @@ bool ModuleCongratsScreen::Start() {
 
 	Mix_FadeInMusic(Mcongrat, 1, 4000);
 
+
 	this->Enable();
 
 	return true;
@@ -43,8 +46,6 @@ bool ModuleCongratsScreen::CleanUp() {
 
 	App->audio->DeleteMusic(Mcongrat);
 
-	App->player->Disable();
-
 	this->Disable();
 
 	return true;
@@ -54,11 +55,12 @@ update_status ModuleCongratsScreen::Update() {
 
 	App->render->Blit(congratScreen, 160, 195, NULL);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE]) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 
 		App->fade->FadeToBlack(this, App->neogeo, 2.0f);
 		Mix_FadeOutMusic(2000);
 	}
+
 
 	return UPDATE_CONTINUE;
 }

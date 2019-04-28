@@ -32,9 +32,7 @@ public:
 	SDL_Rect ILbar;
 	SDL_Rect HaoBar;
 	SDL_Rect Points;
-
-	//Collider* LLimit;
-	//Collider* RLimit;
+	SDL_Rect KO;
 
 	Animation background;
 
