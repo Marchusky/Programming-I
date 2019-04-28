@@ -41,25 +41,25 @@ ModuleBackground::ModuleBackground()
 	background.speed = 0.05f;
 
 	//Lifebars//
-	Rbar.x = 273;
-	Rbar.y = 406;
+	Rbar.x = 0;
+	Rbar.y = 97;
 	Rbar.w = 134;
 	Rbar.h = 15;
 
-	Lbar.x = 273;
-	Lbar.y = 422;
+	Lbar.x = 0;
+	Lbar.y = 113;
 	Lbar.w = 134;
 	Lbar.h = 15;
 	
-	IRbar.x = 273;
-	IRbar.y = 309;
-	IRbar.w = 129;
-	IRbar.h = 9;
+	IRbar.x = ILbar.x = 0;
+	IRbar.y = ILbar.y = 2;
+	IRbar.w = ILbar.w = 128;
+	IRbar.h = ILbar.h = 9;
 
-	ILbar.x = 402;
-	ILbar.y = 309;
-	ILbar.w = -129;
-	ILbar.h = 9;
+	/*ILbar.x = 3;
+	ILbar.y = 4;
+	ILbar.w = 129;
+	ILbar.h = 9;*/
 
 	//Fighter_Name//
 	HaoBar.x = 276;
@@ -84,7 +84,7 @@ bool ModuleBackground::Start()
 	bool ret = true;
 
 	graphics = App->textures->Load("Textures/Screens/haohmaru_scene.png");
-	lifebar = App->textures->Load("Textures/UI/Sprite_Sheet_UI_1.png");
+	lifebar = App->textures->Load("Textures/UI/lifebars.png");
 	UI = App->textures->Load("Textures/UI/Sprite_Sheet_UI_1.png");
 
 	HaohmaruStage = App->audio->LoadMus("Audios/Music/HaohmaruScene.ogg");
@@ -149,23 +149,20 @@ update_status ModuleBackground::Update()
 			App->fade->FadeToBlack(this, App->congrats, 1.5f);
 			Mix_FadeOutMusic(1500);
 			IRbar.w = 129;
-			ILbar.w = -129;
-			ILbar.x = 403;
+			ILbar.x = 2;
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN){ //Health-substracting button
 	
-		ILbar.x += 10;
-		ILbar.w -= 10;
+		ILbar.x -= 10;
 		
 		if (ILbar.w <= 1) //40 instead of 0 because it doesnt exactly fit. If the duel ends then reset the healthbars
 		{
 			App->fade->FadeToBlack(this, App->congrats, 1.5f);
 			Mix_FadeOutMusic(1500);
 			IRbar.w = 129;
-			ILbar.w = -129;
-			ILbar.x = 403;
+			ILbar.x = 2;
 		}
 	}
 	//background
@@ -173,9 +170,9 @@ update_status ModuleBackground::Update()
 
 	//lifebars//
 	App->render->Blit(lifebar, 380, 212, &Rbar);
-	App->render->Blit(lifebar, 382, 213, &IRbar);
+	App->render->Blit(lifebar, 382, 214, &IRbar);
 	App->render->Blit(lifebar, 165, 212, &Lbar);
-	App->render->Blit(lifebar, 169, 213, &ILbar);
+	App->render->Blit(lifebar, 169, 214, &ILbar);
 
 	//UI//
 	App->render->Blit(UI, 170, 230, &HaoBar);
