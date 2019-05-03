@@ -1,9 +1,9 @@
-#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cassert>
+
 #ifndef QUEUE_H
 #define QUEUE_H
-
-#include <cassert>
-#include <iostream>
 
 #define QUEUE_CHUNK_SIZE 8
 
@@ -29,7 +29,7 @@ public:
 		}
 		else
 		{
-			index_back = (index_back + 1) % capacity;
+			index_back = (index_back + 1) % capacity; //para que sea circular (donut)
 		}
 
 		array[index_back] = value;

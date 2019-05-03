@@ -1,4 +1,8 @@
+#ifndef STACK_H
+#define STACK_H
 
+#include <cassert>
+#include <iostream>
 
 class Stack
 {
@@ -15,4 +19,4 @@ public:
 private:
 	int _top; // Current top index (-1 if empty)
 	int *_array; // Dynamically allocated array
-};
+};#endif // STACK_H
