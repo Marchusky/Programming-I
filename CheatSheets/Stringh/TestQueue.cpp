@@ -1,4 +1,5 @@
 #include "Queue.h"
+#include "DoublyLinkedList.h"
 #include <iostream>
 
 void test_queue()
@@ -6,15 +7,15 @@ void test_queue()
 	std::cout << "*** TEST_QUEUE ***" << std::endl;
 	std::cout << std::endl;
 
-	Queue q;
-	q.enqueue(1);
-	q.enqueue(2);
-	q.enqueue(3);
+	Queue<float> q;
+	q.enqueue(1.0f);
+	q.enqueue(2.0f);
+	q.enqueue(3.0f);
 	std::cout << "The queue should print: 1 2 3" << std::endl << "contents: ";
 	q.print();
 	std::cout << std::endl;
 
-	q.clear();
+	/*q.clear();
 	std::cout << "The queue should print nothing (it's empty)" << std::endl << "contents: ";
 	q.print();
 	std::cout << std::endl;
@@ -31,5 +32,12 @@ void test_queue()
 
 	std::cout << "The queue back should be 18" << std::endl << "back: ";
 	std::cout << q.back() << std::endl;
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 }
+
+//int main()
+//{
+//	test_queue();
+//	system("pause");
+//	return 0;
+//}
