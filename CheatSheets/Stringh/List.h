@@ -51,3 +51,5 @@ public:
 	Node *last = nullptr;
 	unsigned int num_elems = 0;
 };
+
+#endif // LIST_H

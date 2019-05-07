@@ -1,12 +1,13 @@
-#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cassert>
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <cassert>
-#include <iostream>
-
 #define QUEUE_CHUNK_SIZE 8
 
+template <class T> //cambiar ints por Ts.
 class Queue
 {
 public:
@@ -16,7 +17,7 @@ public:
 		delete[] array;
 	}
 
-	void enqueue(int value)
+	void enqueue(T value)
 	{
 		if (num_elems == capacity) {
 			increaseCapacity();
@@ -29,7 +30,7 @@ public:
 		}
 		else
 		{
-			index_back = (index_back + 1) % capacity;
+			index_back = (index_back + 1) % capacity; //para que sea circular (donut)
 		}
 
 		array[index_back] = value;
@@ -50,14 +51,14 @@ public:
 		}
 	}
 
-	int front() const
+	T front() const //retorna una T
 	{
 		assert(num_elems > 0 && "The queue is empty");
 
 		return array[index_front];
 	}
 
-	int back() const
+	T back() const
 	{
 		assert(num_elems > 0 && "The queue is empty");
 
@@ -98,7 +99,7 @@ private:
 	void increaseCapacity()
 	{
 		capacity = capacity + QUEUE_CHUNK_SIZE;
-		int *new_array = new int[capacity];
+		T *new_array = new T[capacity];
 		for (int i = 0; i < num_elems; ++i)
 		{
 			new_array[i] = array[(index_front + i) % num_elems];
@@ -109,11 +110,12 @@ private:
 		index_back = num_elems - 1;
 	}
 
-	int *array = new int[QUEUE_CHUNK_SIZE];
-	int index_front = -1;
-	int index_back = -1;
-	int num_elems = 0;
+	T *array = new T[QUEUE_CHUNK_SIZE]; //cambia solo los que se refieren a los datos dentro del array
+	int index_front = -1;//
+	int index_back = -1; // esto son indices no se cambian
+	int num_elems = 0;   //
 	int capacity = QUEUE_CHUNK_SIZE;
 };
 
 #endif // QUEUE_H
+
