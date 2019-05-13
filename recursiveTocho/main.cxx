@@ -87,6 +87,14 @@ int numTrues(bool vec[], int sizeVec, unsigned int index)
 	
 }
 
+//bool searchRec(int vec[], int sizeVec, unsigned int index, int val)
+//{
+//	if (index < sizeVec)
+//	{
+//		searchRec(vec,)
+//	}
+//
+//}
 
 void main()
 {
