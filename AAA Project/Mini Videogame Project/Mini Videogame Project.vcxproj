@@ -130,7 +130,6 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Globals.cpp" />
-    <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModuleCharacterSelect.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />

@@ -2,62 +2,47 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#include "Application.h"
-#include <math.h>
-#define MAX_FRAMES 50
+// defines the number of frames
+#define MAX_FRAMES 1000
 
-struct Collider;
+class Animation {
 
-struct Frame {
-
-	SDL_Rect rect;
-	float speed;
-};
-
-class Animation
-{
-public:
+public: 
 	bool loop = true;
-	Frame frames[MAX_FRAMES];
-	float current_frame;
+	float speed = 1.0f;
+	// We define frames as a rectangle.
+	SDL_Rect frames[MAX_FRAMES];
+
 private:
-	int loops;
-	int num_frames = 0;
+	float current_frame;
+	bool end_animation = false;
 	int last_frame = 0;
-	int cont = -1;
+	int loops = 0;
 
 public:
 
-	void PushBack(const SDL_Rect& rect, float speed = 1.0f)
-	{
-		num_frames++;
-		++last_frame;
-		int i = ++cont;
-		frames[i].rect = rect;
-		frames[i].speed = speed;
+	// Defines the last frame as the rect.
+	void PushBack(const SDL_Rect &rect) {
+
+		frames[last_frame++] = rect;
 	}
 
-	void SetWidth(const int & width) {
-		for (int i = 0; i < num_frames; ++i) {
-			frames[i].rect.w = width;
-		}
-	}
-
-	SDL_Rect& GetCurrentFrame()
-	{
-		if (!App->is_paused) {
-			current_frame += frames[(int)current_frame].speed;
-			if (current_frame >= last_frame) {
-				current_frame = (loop) ? 0.0f : last_frame - 1;
-				loops++;
-			}
+	// Returns a rect with current position of the frame.
+	SDL_Rect &GetCurrentFrame(){
+	
+		current_frame += speed;
+		if (current_frame >= last_frame) {
+			current_frame = (loop) ? 0.0f : last_frame - 1;
+			end_animation = true;
+			loops++;
 		}
 
-		return frames[(int)current_frame].rect;
+		return frames[(int)current_frame];
 	}
+
 	bool Finished() const
 	{
-		return loops == num_frames;
+		return loops > 0;
 	}
 
 	void Reset()
@@ -65,12 +50,19 @@ public:
 		current_frame = 0;
 		loops = 0;
 	}
-	int SeeCurrentFrame() {
-		return (int)current_frame;
+
+	// This function sets an ended animation to end
+	void SetAnimation(bool ended) {
+
+		end_animation = ended;
 	}
-	SDL_Rect GetCurrentRect() {
-		return frames[(int)current_frame].rect;
+
+	// This function gets the animation a returns it to end once the last frame is over
+	bool GetAnimation() {
+
+		return end_animation;
 	}
 };
 
 #endif
+

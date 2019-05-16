@@ -1,6 +1,6 @@
-// ----------------------------------------------------
-// Point class    -----------
-// ----------------------------------------------------
+// --------------------------------------------------------------------
+// Point class ----------- Todo son funciones matematicas entre puntos.
+// --------------------------------------------------------------------
 
 #ifndef __P2POINT_H__
 #define __P2POINT_H__
@@ -8,23 +8,23 @@
 #include "Globals.h"
 #include <math.h>
 
-template<class TYPE>
-class p2Point
+template<class TYPE> //preguntar que es
+class p2Point //crea class Point
 {
 public:
 
-	TYPE x, y;
+	TYPE x, y; //tiene variables x,y
 
-	p2Point()
+	p2Point() //constructor
 	{}
 
-	p2Point(const p2Point& v)
+	p2Point(const p2Point& v) //crea punto v
 	{
 		this->x = v.x;
 		this->y = v.y;
 	}
 
-	p2Point(const TYPE& x, const TYPE& y)
+	p2Point(const TYPE& x, const TYPE& y) //crea punto con TYPE(ni idea)
 	{
 		this->x = x;
 		this->y = y;
@@ -38,7 +38,7 @@ public:
 		return(*this);
 	}
 
-	// Math ------------------------------------------------
+	// Math 
 	p2Point operator -(const p2Point &v) const
 	{
 		p2Point r;
@@ -85,7 +85,7 @@ public:
 		return (x != v.x || y != v.y);
 	}
 
-	// Utils ------------------------------------------------
+	// Utils 
 	bool IsZero() const
 	{
 		return (x == 0 && y == 0);
@@ -105,7 +105,7 @@ public:
 		return(*this);
 	}
 
-	// Distances ---------------------------------------------
+	// Distances 
 	TYPE DistanceTo(const p2Point& v) const
 	{
 		TYPE fx = x - v.x;

@@ -84,9 +84,6 @@
     <ClCompile Include="ModuleFonts.cpp">
       <Filter>Modules\General</Filter>
     </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Containers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
