@@ -20,7 +20,17 @@ public:
 			delete n;
 		}
 	}
-	void insert(int value);
+	void insert(int value)
+	{
+		if (vacio)
+		{
+			
+		}
+		else
+		{
+			insertRec(value, root);
+		}
+	}
 private:
 	struct Node
 	{
@@ -37,5 +47,9 @@ private:
 			printInorderRec(n->right);
 			std::cout << n->value << " - ";
 		}
+	}
+	void insertRec(int value, Node *n)
+	{
+		//lo de mas pequeño mas grande
 	}
 };
