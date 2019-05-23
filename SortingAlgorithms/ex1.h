@@ -122,23 +122,52 @@ void mergesort(uint32 *array, int begin, int end)
 int partition(uint32 *array, int begin, int end)
 {
 	// Take the last value (for example) as the pivot
-	//int pivotIndex = 0;
 	// Could be any other value in the array
 	uint32 pivot = array[end];
 
 	// Initialize the pivot index at the beginning
 	int pivotIndex = begin;
-
+	int temp = 0;
 	// Traversing the array:
-	// Each value we find that is less than the pivot we push
-	// it to the left (swap) and increase the pivot index
-	// TODO
+	for (int i = begin; i <= end; i++)
+	{
+		// Each value we find that is less than the pivot we push
+		// it to the left (swap) and increase the pivot index
+		if (array[i] <= pivot)
+		{
+			pivotIndex++;
+			temp = array[i];
+			array[i] = array[end];
+			array[end] = temp;
+		}
+	}
 
 	// Put the pivot in its position
 	// TODO
 
 	return pivotIndex;
 }
+
+//int portition(arr[], low, high)
+//{
+//	// pivot (Element to be placed at right position)
+//	pivot = arr[high];
+//
+//	i = (low - 1)  // Index of smaller element
+//
+//		for (j = low; j <= high - 1; j++)
+//		{
+//			// If current element is smaller than or
+//			// equal to pivot
+//			if (arr[j] <= pivot)
+//			{
+//				i++;    // increment index of smaller element
+//				swap arr[i] and arr[j]
+//			}
+//		}
+//	swap arr[i + 1] and arr[high])
+//	return (i + 1)
+//}
 
 void quicksort(uint32 *array, int begin, int end)
 {
